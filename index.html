@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Infrastructure Proposal</title>
+    <title>Digital Infrastructure Proposal — AEOPY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Added html2pdf for download functionality -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <script>
@@ -24,6 +23,7 @@
                         brand: {
                             50: '#f0f9ff',
                             100: '#e0f2fe',
+                            400: '#38bdf8',
                             500: '#0ea5e9',
                             600: '#0284c7',
                             700: '#0369a1',
@@ -115,75 +115,25 @@
             margin: 0 auto;
         }
 
-        .pricing-card-hover-transition {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-        .pricing-card.active-plan {
-            background-color: #eff6ff !important;
-            border-color: #0284c7 !important;
-            transform: scale(1.02) !important;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
-            z-index: 30 !important;
-        }
-
-        .pricing-card.active-plan h3 {
-            color: #111827 !important;
-        }
-
-        .pricing-card.active-plan .plan-price {
-            color: #0284c7 !important;
-        }
-
-        .pricing-card.active-plan .plan-sub {
-            color: #0284c7 !important;
-        }
-
-        .pricing-card.active-plan ul {
-            color: #374151 !important;
-        }
-
-        .pricing-card.active-plan .material-symbols-outlined {
-            color: #0284c7 !important;
-        }
-
-        .pricing-card.active-plan .select-btn {
-            display: block !important;
-        }
-
-        .pricing-card.active-plan .footer-text {
-            display: none !important;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-
+        /* ── CONTRACT TABLES ── */
         .contract-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.85rem;
-            margin-bottom: 2rem;
+            font-size: 0.82rem;
+            margin-bottom: 1.2rem;
             border: 1px solid #e5e7eb;
+            font-family: 'Inter', sans-serif;
         }
 
         .contract-table th,
         .contract-table td {
             border: 1px solid #e5e7eb;
-            padding: 10px;
+            padding: 8px 10px;
             text-align: left;
         }
 
@@ -193,22 +143,12 @@
             color: #111827;
         }
 
-        .contract-table tr.highlight-plan {
-            background-color: #eff6ff;
-            border-left: 4px solid #0284c7;
-        }
-
-        .contract-table tr.highlight-plan td {
-            font-weight: 600;
-            color: #0c4a6e;
-        }
+        .contract-table tr.row-merchant td { background: #f0fdf4; font-weight: 600; }
+        .contract-table tr.row-developer td { background: #eff6ff; font-weight: 600; }
+        .contract-table tr.row-total td { font-weight: 700; background: #f9fafb; }
 
         @media print {
-            body {
-                background: white;
-                height: auto;
-                overflow: visible;
-            }
+            body { background: white; height: auto; overflow: visible; }
 
             .wizard-container,
             .section-view {
@@ -219,26 +159,14 @@
                 display: none;
             }
 
-            #slide-8 {
+            #slide-6 {
                 display: block !important;
                 opacity: 1 !important;
                 padding: 0;
             }
 
-            .contract-wrapper {
-                max-width: 100%;
-                padding-bottom: 0;
-            }
-
-            .no-print {
-                display: none !important;
-            }
-
-            .contract-table tr.highlight-plan {
-                background-color: #e0f2fe !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+            .contract-wrapper { max-width: 100%; padding-bottom: 0; }
+            .no-print { display: none !important; }
         }
     </style>
 </head>
@@ -247,8 +175,10 @@
 
     <div class="wizard-container">
 
-        <!-- View 1: The Problem -->
-        <div id="slide-1" class="section-view active">
+        <!-- ══════════════════════════════════════
+             SLIDE 1 — The Problem
+        ══════════════════════════════════════ -->
+        <div id="slide-0" class="section-view active">
             <div class="content-wrapper flex flex-col lg:flex-row gap-12 items-center justify-between pb-16 lg:pb-0">
                 <div class="w-full lg:w-1/2 flex flex-col justify-center space-y-6 animate-slide-up order-2 lg:order-1">
                     <div class="flex items-center gap-2 text-brand-600 font-bold uppercase tracking-wider text-sm">
@@ -269,7 +199,7 @@
                             <span class="material-symbols-outlined text-red-500 mt-1 text-2xl">money_off</span>
                             <div>
                                 <h3 class="font-bold text-gray-900 text-lg">Lost Sales</h3>
-                                <p class="text-base text-gray-600">"Dm to order" and slow replies cause customers to
+                                <p class="text-base text-gray-600">"DM to order" and slow replies cause customers to
                                     ghost you.</p>
                             </div>
                         </div>
@@ -305,8 +235,10 @@
             </div>
         </div>
 
-        <!-- View 2: The Solution -->
-        <div id="slide-2" class="section-view">
+        <!-- ══════════════════════════════════════
+             SLIDE 2 — The Solution
+        ══════════════════════════════════════ -->
+        <div id="slide-1" class="section-view">
             <div class="content-wrapper flex flex-col lg:flex-row gap-12 items-center pb-16 lg:pb-0">
                 <div class="w-full lg:w-1/2 h-64 lg:h-[75vh] flex items-center justify-center order-1">
                     <div class="relative w-full h-full max-h-[600px] rounded-2xl overflow-hidden shadow-2xl -rotate-1">
@@ -324,7 +256,7 @@
                         <span class="text-brand-600">Start Building a Brand.</span>
                     </h1>
                     <p class="text-xl text-gray-700">Introducing Custom Digital Infrastructure for <span
-                            class="font-bold text-gray-900">Effisma</span>.</p>
+                            class="font-bold text-gray-900">your Store</span>.</p>
 
                     <div class="grid grid-cols-1 gap-4 mt-4">
                         <div class="flex gap-4 items-center p-4 bg-white rounded-xl shadow-sm opacity-0 animate-fade-in"
@@ -380,8 +312,10 @@
             </div>
         </div>
 
-        <!-- View 3: Customer Experience -->
-        <div id="slide-3" class="section-view bg-gray-50">
+        <!-- ══════════════════════════════════════
+             SLIDE 3 — Customer Experience
+        ══════════════════════════════════════ -->
+        <div id="slide-2" class="section-view bg-gray-50">
             <div class="content-wrapper pb-16 lg:pb-0">
                 <div class="text-center mb-8 animate-slide-up">
                     <div
@@ -394,7 +328,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 1. Native App Experience -->
                     <div
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-purple-500 flex flex-col gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="flex items-center justify-between">
@@ -408,7 +341,6 @@
                             smooth experience.</p>
                     </div>
 
-                    <!-- 2. Brand Customization -->
                     <div
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-gray-900 flex flex-col gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="flex items-center justify-between">
@@ -418,10 +350,9 @@
                         </div>
                         <h3 class="text-xl font-bold text-gray-900">Premium Branding</h3>
                         <p class="text-sm text-gray-600 leading-relaxed">Fully tailored to your aesthetic (e.g., sleek
-                            black & white themes) to position your brand alongside global luxury retailers.</p>
+                            black &amp; white themes) to position your brand alongside global luxury retailers.</p>
                     </div>
 
-                    <!-- 3. Seamless Payment -->
                     <div
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-teal-500 flex flex-col gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="flex items-center justify-between">
@@ -433,11 +364,10 @@
                                 MoMo</div>
                         </div>
                         <h3 class="text-xl font-bold text-gray-900">Seamless Payments</h3>
-                        <p class="text-sm text-gray-600 leading-relaxed">Integrated Mobile Money & card payments
-                            eliminate the "I've sent the money" back-and-forth. Secure & fast checkout.</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Integrated Mobile Money &amp; card payments
+                            eliminate the "I've sent the money" back-and-forth. Secure &amp; fast checkout.</p>
                     </div>
 
-                    <!-- 4. Email alerts -->
                     <div
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-blue-500 flex flex-col gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="flex items-center justify-between">
@@ -450,7 +380,6 @@
                             notifications instantly when an order is placed or its status changes.</p>
                     </div>
 
-                    <!-- 5. Cart & History -->
                     <div
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-pink-500 flex flex-col gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="flex items-center justify-between">
@@ -458,12 +387,11 @@
                                 <span class="material-symbols-outlined text-3xl text-pink-600">shopping_cart</span>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900">Cart & History</h3>
+                        <h3 class="text-xl font-bold text-gray-900">Cart &amp; History</h3>
                         <p class="text-sm text-gray-600 leading-relaxed">Customers can save items for later and easily
                             reorder from their past history, dramatically increasing retention.</p>
                     </div>
 
-                    <!-- 6. Promotional Banners -->
                     <div
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-orange-500 flex flex-col gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="flex items-center justify-between">
@@ -479,8 +407,10 @@
             </div>
         </div>
 
-        <!-- View 4: Admin Dashboard -->
-        <div id="slide-4" class="section-view bg-white">
+        <!-- ══════════════════════════════════════
+             SLIDE 4 — Admin Dashboard
+        ══════════════════════════════════════ -->
+        <div id="slide-3" class="section-view bg-white">
             <div class="content-wrapper pb-16 lg:pb-0">
                 <div class="text-center mb-10 animate-slide-up">
                     <div
@@ -494,7 +424,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- 1. VIP Filter -->
                     <div
                         class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 flex flex-col gap-4 hover:shadow-md transition-all">
                         <div class="p-3 bg-indigo-100 rounded-lg w-fit">
@@ -505,7 +434,6 @@
                             top-spending VIP customers and identify who is actually driving your revenue.</p>
                     </div>
 
-                    <!-- 2. Custom VIP Notifications -->
                     <div
                         class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 flex flex-col gap-4 hover:shadow-md transition-all">
                         <div class="p-3 bg-indigo-100 rounded-lg w-fit">
@@ -516,7 +444,6 @@
                             directly to particular VIP customers to reward loyalty and drive quick sales.</p>
                     </div>
 
-                    <!-- 3. Advanced Analytics -->
                     <div
                         class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 flex flex-col gap-4 hover:shadow-md transition-all">
                         <div class="p-3 bg-indigo-100 rounded-lg w-fit">
@@ -527,7 +454,6 @@
                             Know exactly which products are performing best at any given period.</p>
                     </div>
 
-                    <!-- 4. Review Moderation -->
                     <div
                         class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 flex flex-col gap-4 hover:shadow-md transition-all">
                         <div class="p-3 bg-indigo-100 rounded-lg w-fit">
@@ -538,7 +464,6 @@
                             or manage customer reviews before they appear publicly on your store.</p>
                     </div>
 
-                    <!-- 5. The Kill Switch -->
                     <div
                         class="bg-red-50 p-6 rounded-2xl border border-red-100 flex flex-col gap-4 hover:shadow-md transition-all">
                         <div class="p-3 bg-red-100 rounded-lg w-fit">
@@ -549,7 +474,6 @@
                             checkouts or put the site into Maintenance Mode with a single tap.</p>
                     </div>
 
-                    <!-- 6. Total Control -->
                     <div
                         class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 flex flex-col gap-4 hover:shadow-md transition-all">
                         <div class="p-3 bg-indigo-100 rounded-lg w-fit">
@@ -563,130 +487,10 @@
             </div>
         </div>
 
-        <!-- View 5: Pricing -->
-        <div id="slide-5" class="section-view bg-gray-900">
-            <div class="content-wrapper pb-20 lg:pb-0">
-                <div class="text-center mb-8 pt-4 lg:pt-0">
-                    <h2 class="text-4xl font-extrabold text-white">Choose Your Partnership Model</h2>
-                    <p class="text-gray-400 mt-2 text-lg">SaaS pricing designed to scale with your growth.</p>
-                </div>
-
-                <div class="flex flex-col lg:flex-row gap-6 items-stretch justify-center">
-
-                    <!-- Card 1 (Recommended) -->
-                    <div id="plan-0" onclick="togglePlan(0)"
-                        class="pricing-card group relative w-full lg:w-1/3 bg-gray-800 rounded-2xl p-6 border border-gray-700 flex flex-col pricing-card-hover-transition hover:bg-white hover:border-transparent hover:scale-105 hover:shadow-xl hover:z-20 cursor-pointer">
-                        <div
-                            class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg z-30">
-                            RECOMMENDED</div>
-
-                        <div class="mb-4">
-                            <h3 class="text-xl font-bold text-gray-100 group-hover:text-gray-900">The Zero-Risk Partner
-                            </h3>
-                            <div class="plan-price text-3xl font-bold text-white mt-2 group-hover:text-brand-600">GHS 0
-                            </div>
-                            <div
-                                class="plan-sub text-xs text-brand-400 font-bold mt-1 uppercase tracking-wide group-hover:text-brand-600">
-                                Upfront Cost</div>
-                        </div>
-                        <ul class="space-y-3 text-sm text-gray-300 flex-grow font-medium group-hover:text-gray-700">
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-green-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                <strong>5%</strong> Transaction Commission
-                            </li>
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-green-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                <strong>GHS 0</strong> Monthly Maintenance
-                            </li>
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-green-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                Hosting Covered (Year 1)</li>
-                        </ul>
-                        <div
-                            class="footer-text mt-4 pt-4 border-t border-gray-700 text-xs text-gray-400 group-hover:hidden">
-                            Best for immediate launch without risk.
-                        </div>
-                        <button onclick="event.stopPropagation(); handleSelectPlan(0)"
-                            class="select-btn hidden group-hover:block mt-auto w-full py-3 bg-brand-600 text-white rounded-lg font-bold hover:bg-brand-700 transition shadow-md text-sm">
-                            Select Plan
-                        </button>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div id="plan-1" onclick="togglePlan(1)"
-                        class="pricing-card group relative w-full lg:w-1/3 bg-gray-800 rounded-2xl p-6 border border-gray-700 flex flex-col pricing-card-hover-transition hover:bg-white hover:border-transparent hover:scale-105 hover:shadow-xl hover:z-20 cursor-pointer">
-                        <div class="mb-4">
-                            <h3 class="text-xl font-bold text-gray-100 group-hover:text-gray-900">The Hybrid Partner
-                            </h3>
-                            <div class="plan-price text-3xl font-bold text-white mt-2 group-hover:text-brand-600">GHS 0
-                            </div>
-                            <div
-                                class="plan-sub text-xs text-brand-400 font-bold mt-1 uppercase tracking-wide group-hover:text-brand-600">
-                                Upfront Cost</div>
-                        </div>
-                        <ul class="space-y-3 text-sm text-gray-300 flex-grow font-medium group-hover:text-gray-700">
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-brand-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                <strong>4%</strong> Transaction Commission
-                            </li>
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-brand-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                <strong>GHS 500</strong> Monthly Maintenance
-                            </li>
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-brand-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                Hosting Covered (Year 1)</li>
-                        </ul>
-                        <div
-                            class="footer-text mt-4 pt-4 border-t border-gray-700 text-xs text-gray-400 group-hover:hidden">
-                            Best for growing shops balancing volume.
-                        </div>
-                        <button onclick="event.stopPropagation(); handleSelectPlan(1)"
-                            class="select-btn hidden group-hover:block mt-auto w-full py-3 bg-brand-600 text-white rounded-lg font-bold hover:bg-brand-700 transition shadow-md text-sm">
-                            Select Plan
-                        </button>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div id="plan-2" onclick="togglePlan(2)"
-                        class="pricing-card group relative w-full lg:w-1/3 bg-gray-800 rounded-2xl p-6 border border-gray-700 flex flex-col pricing-card-hover-transition hover:bg-white hover:border-transparent hover:scale-105 hover:shadow-xl hover:z-20 cursor-pointer">
-                        <div class="mb-4">
-                            <h3 class="text-xl font-bold text-gray-100 group-hover:text-gray-900">The Standard Agency
-                            </h3>
-                            <div class="plan-price text-3xl font-bold text-white mt-2 group-hover:text-brand-600">GHS 0
-                            </div>
-                            <div
-                                class="plan-sub text-xs text-yellow-400 font-bold mt-1 uppercase tracking-wide group-hover:text-brand-600">
-                                Upfront Cost</div>
-                        </div>
-                        <ul class="space-y-3 text-sm text-gray-300 flex-grow font-medium group-hover:text-gray-700">
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-yellow-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                <strong>3.5%</strong> Transaction Commission
-                            </li>
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-yellow-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                <strong>GHS 500</strong> Monthly Maintenance
-                            </li>
-                            <li class="flex items-center gap-2"><span
-                                    class="material-symbols-outlined text-yellow-400 text-lg group-hover:text-brand-600">check_circle</span>
-                                Hosting Paid by Client</li>
-                        </ul>
-                        <div
-                            class="footer-text mt-4 pt-4 border-t border-gray-700 text-xs text-gray-400 group-hover:hidden">
-                            Best for established, high-volume brands.
-                        </div>
-                        <button onclick="event.stopPropagation(); handleSelectPlan(2)"
-                            class="select-btn hidden group-hover:block mt-auto w-full py-3 bg-brand-600 text-white rounded-lg font-bold hover:bg-brand-700 transition shadow-md text-sm">
-                            Select Plan
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- View 6: Roadmap -->
-        <div id="slide-6" class="section-view">
+        <!-- ══════════════════════════════════════
+             SLIDE 5 — Roadmap
+        ══════════════════════════════════════ -->
+        <div id="slide-4" class="section-view">
             <div class="content-wrapper flex flex-col lg:flex-row gap-12 pb-16 lg:pb-0">
                 <div class="w-full lg:w-2/5 flex flex-col justify-center space-y-6 order-1">
                     <div class="flex items-center gap-2 text-brand-600 font-bold uppercase tracking-wider text-sm">
@@ -714,8 +518,7 @@
                 <div class="w-full lg:w-3/5 relative flex flex-col justify-center pl-6 order-2">
                     <div class="absolute left-6 top-10 bottom-10 w-1 bg-gray-200 rounded-full"></div>
 
-                    <div
-                        class="relative pl-10 mb-6 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
+                    <div class="relative pl-10 mb-6 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
                         <div
                             class="absolute -left-3.5 top-1 h-8 w-8 bg-white border-4 border-gray-400 rounded-full flex items-center justify-center z-10 group-hover:border-brand-500 transition-colors">
                             <span class="text-xs font-bold text-gray-700 group-hover:text-brand-600">01</span>
@@ -723,14 +526,13 @@
                         <div
                             class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 group-hover:shadow-md transition-all duration-300">
                             <div class="text-sm font-bold text-brand-600 mb-1">Days 1-2</div>
-                            <h3 class="text-xl font-bold text-gray-900">Setup & Config</h3>
+                            <h3 class="text-xl font-bold text-gray-900">Setup &amp; Config</h3>
                             <p class="text-gray-700 text-sm">Server configuration, domain setup, and initial branding
                                 integration.</p>
                         </div>
                     </div>
 
-                    <div
-                        class="relative pl-10 mb-6 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
+                    <div class="relative pl-10 mb-6 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
                         <div
                             class="absolute -left-3.5 top-1 h-8 w-8 bg-white border-4 border-gray-400 rounded-full flex items-center justify-center z-10 group-hover:border-brand-500 transition-colors">
                             <span class="text-xs font-bold text-gray-700 group-hover:text-brand-600">02</span>
@@ -744,8 +546,7 @@
                         </div>
                     </div>
 
-                    <div
-                        class="relative pl-10 mb-6 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
+                    <div class="relative pl-10 mb-6 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
                         <div
                             class="absolute -left-3.5 top-1 h-8 w-8 bg-white border-4 border-gray-400 rounded-full flex items-center justify-center z-10 group-hover:border-brand-500 transition-colors">
                             <span class="text-xs font-bold text-gray-700 group-hover:text-brand-600">03</span>
@@ -759,8 +560,7 @@
                         </div>
                     </div>
 
-                    <div
-                        class="relative pl-10 mb-6 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
+                    <div class="relative pl-10 mb-6 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
                         <div
                             class="absolute -left-3.5 top-1 h-8 w-8 bg-white border-4 border-gray-400 rounded-full flex items-center justify-center z-10 group-hover:border-brand-500 transition-colors">
                             <span class="text-xs font-bold text-gray-700 group-hover:text-brand-600">04</span>
@@ -777,30 +577,33 @@
 
                     <div class="relative pl-10 group cursor-pointer hover:-translate-y-1 transition-all duration-300">
                         <div
-                            class="absolute -left-3.5 top-1 h-8 w-8 bg-brand-600 border-4 border-brand-200 rounded-full flex items-center justify-center z-10 shadow-lg animate-pulse">
-                            <span class="material-symbols-outlined text-white text-sm">rocket_launch</span>
+                            class="absolute -left-3.5 top-1 h-8 w-8 bg-brand-600 border-4 border-brand-200 rounded-full flex items-center justify-center z-10">
+                            <span class="material-symbols-outlined text-white text-base">check</span>
                         </div>
                         <div
-                            class="bg-brand-50 p-4 rounded-xl shadow-md border border-brand-200 group-hover:shadow-lg transition-all duration-300">
-                            <div class="text-sm font-bold text-brand-700 mb-1">Day 7</div>
-                            <h3 class="text-xl font-bold text-brand-900">LAUNCH</h3>
-                            <p class="text-brand-800 text-sm">Platform goes Live on your custom domain. No waiting for
-                                App Store approvals. You are instantly open for business.</p>
+                            class="bg-brand-600 p-4 rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300">
+                            <div class="text-sm font-bold text-brand-100 mb-1">Day 8+</div>
+                            <h3 class="text-xl font-bold text-white">Live &amp; Growing</h3>
+                            <p class="text-brand-100 text-sm">Your store is live. We monitor, maintain, and scale
+                                together.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- View 7: Client Information Form -->
-        <div id="slide-7" class="section-view bg-white">
-            <div class="content-wrapper items-center pb-20 lg:pb-0">
-                <div class="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
-                    <div class="flex items-center gap-2 text-brand-600 font-bold uppercase tracking-wider text-sm mb-6">
+        <!-- ══════════════════════════════════════
+             SLIDE 6 — Client Details Form
+        ══════════════════════════════════════ -->
+        <div id="slide-5" class="section-view bg-gray-50">
+            <div class="content-wrapper flex items-center justify-center pb-16 lg:pb-0">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 lg:p-12 w-full max-w-lg">
+                    <div class="flex items-center gap-2 text-brand-600 font-bold uppercase tracking-wider text-sm mb-4">
                         <span class="material-symbols-outlined text-xl">person</span>
                         Client Details
                     </div>
-                    <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Tell us about you</h2>
+                    <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Tell us about you</h2>
+                    <p class="text-gray-500 text-sm mb-6">Fill in the details below to generate your personalised agreement.</p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
@@ -818,188 +621,238 @@
                     </div>
 
                     <div class="mb-6">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">Company Name / Business Name</label>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Store / Brand Name</label>
                         <input type="text" id="client-company"
                             class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 transition bg-gray-50 text-base"
-                            placeholder="Shoe Store">
+                            placeholder="Luxury Threads">
                     </div>
 
                     <div class="mb-8">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">Date of Commencement</label>
-                        <!-- Date input with ID for min date validation -->
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Effective Date</label>
                         <input type="date" id="client-date"
                             class="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 transition bg-gray-50 text-base">
                     </div>
 
                     <button onclick="generateContract()"
-                        class="w-full py-4 bg-brand-600 text-white rounded-lg font-bold text-lg hover:bg-brand-700 transition shadow-lg flex items-center justify-center gap-2">
+                        class="w-full py-4 bg-brand-600 text-white rounded-lg font-bold text-lg hover:bg-brand-700 transition shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]">
                         Generate Agreement <span class="material-symbols-outlined text-xl">gavel</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- View 8: Contract -->
-        <div id="slide-8" class="section-view bg-white">
-            <div class="contract-wrapper text-content">
-                <div
-                    class="flex items-center gap-2 text-brand-600 font-bold uppercase tracking-wider text-sm mb-6 no-print pt-8">
+        <!-- ══════════════════════════════════════
+             SLIDE 7 — The Contract
+        ══════════════════════════════════════ -->
+        <div id="slide-6" class="section-view bg-white">
+            <div class="contract-wrapper">
+                <div class="flex items-center gap-2 text-brand-600 font-bold uppercase tracking-wider text-sm mb-6 no-print pt-8">
                     <span class="material-symbols-outlined text-lg">description</span>
-                    Review & Sign
+                    Review &amp; Sign
                 </div>
 
+                <!-- ── DOCUMENT ── -->
                 <div id="contract-content" class="font-serif text-gray-900">
-                    <div class="text-center mb-4 border-b-2 border-gray-900 pb-4">
-                        <h1 class="text-2xl font-bold text-gray-900">SOFTWARE-AS-A-SERVICE (SaaS) PARTNERSHIP AGREEMENT
-                        </h1>
+
+                    <!-- Header -->
+                    <div class="text-center mb-6 border-b-2 border-gray-900 pb-4">
+                        <h1 class="text-2xl font-bold text-gray-900 tracking-wide">SOFTWARE SERVICE &amp; REVENUE SHARE AGREEMENT</h1>
                     </div>
 
-                    <!-- Comparison Table with Highlight Logic -->
-                    <div class="overflow-x-auto mb-6">
-                        <table class="contract-table min-w-full">
-                            <thead>
-                                <tr>
-                                    <th>Partnership Model</th>
-                                    <th>Upfront Cost</th>
-                                    <th>Monthly Maintenance</th>
-                                    <th>Commission Rate</th>
-                                    <th>Hosting & Domain (Year 1)</th>
-                                </tr>
-                            </thead>
+                    <!-- Parties -->
+                    <div class="mb-7" style="font-family:'Inter',sans-serif;">
+                        <!-- Effective date strip -->
+                        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;">
+                            <div style="flex:1;height:1px;background:#d1d5db;"></div>
+                            <span style="font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9ca3af;white-space:nowrap;">
+                                Effective <span id="contract-date-main"></span>
+                            </span>
+                            <div style="flex:1;height:1px;background:#d1d5db;"></div>
+                        </div>
+
+                        <!-- Split party columns -->
+                        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;">
+
+                            <!-- Developer -->
+                            <div style="padding:1.1rem 1.4rem 1.1rem 0;border-top:2px solid #111827;border-bottom:1px solid #e5e7eb;">
+                                <p style="font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#6b7280;margin-bottom:.55rem;">Developer</p>
+                                <p style="font-size:.92rem;font-weight:700;color:#111827;margin-bottom:.2rem;">Rodney Appiah Afriye</p>
+                                <p style="font-size:.8rem;color:#6b7280;line-height:1.4;">Operating under the AEOPY<br>software development network</p>
+                                <p style="font-size:.75rem;color:#9ca3af;margin-top:.45rem;font-style:italic;">(the "Developer")</p>
+                            </div>
+
+                            <!-- Centre divider with BETWEEN label -->
+                            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 1.5rem;border-top:2px solid #111827;border-bottom:1px solid #e5e7eb;">
+                                <div style="height:100%;width:1px;background:repeating-linear-gradient(to bottom,#d1d5db 0,#d1d5db 5px,transparent 5px,transparent 10px);position:relative;display:flex;align-items:center;justify-content:center;">
+                                    <span style="background:#fff;padding:.35rem 0;font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#9ca3af;writing-mode:vertical-rl;text-orientation:mixed;">Between</span>
+                                </div>
+                            </div>
+
+                            <!-- Merchant -->
+                            <div style="padding:1.1rem 0 1.1rem 1.4rem;border-top:2px solid #111827;border-bottom:1px solid #e5e7eb;">
+                                <p style="font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#6b7280;margin-bottom:.55rem;">Merchant</p>
+                                <p style="font-size:.92rem;font-weight:700;color:#111827;margin-bottom:.2rem;text-transform:uppercase;" id="contract-client-main"></p>
+                                <p style="font-size:.75rem;color:#9ca3af;margin-top:.45rem;font-style:italic;">(the "Merchant")</p>
+                            </div>
+                        </div>
+
+                        <!-- Footer note -->
+                        <div style="margin-top:.6rem;font-size:.75rem;color:#9ca3af;text-align:center;letter-spacing:.03em;">
+                            Together referred to as the "Parties."
+                        </div>
+                    </div>
+
+                    <!-- 1. Scope -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">1. What the Developer Is Building</h3>
+                        <p class="text-sm mb-2 text-justify">The Developer will set up, host, and maintain a custom mobile-friendly web app (PWA) storefront tailored to the Merchant's brand.</p>
+
+                        <p class="text-sm font-bold mb-1">1.1 &nbsp; Online Storefront</p>
+                        <p class="text-sm mb-2 text-justify">The platform includes: a product catalogue, a checkout flow, order tracking for customers, and an admin dashboard for managing and fulfilling orders.</p>
+
+                        <p class="text-sm font-bold mb-1">1.2 &nbsp; Free POS Add-on</p>
+                        <p class="text-sm mb-2 text-justify">A simple Point of Sale (POS) screen is included as a free bonus for physical shop use. Cash sales made through the POS are completely separate from the online platform and are <strong>NOT</strong> subject to the revenue split.</p>
+                    </div>
+
+                    <!-- 2. Revenue Split -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">2. How Revenue Is Split</h3>
+                        <p class="text-sm mb-3 text-justify">Every online payment goes through Paystack (the payment gateway). Here is how the money is divided on each sale:</p>
+
+                        <table class="contract-table">
+                            <thead><tr><th>Party</th><th>Share</th><th>What This Means</th></tr></thead>
                             <tbody>
-                                <tr id="row-plan-0">
-                                    <td>The Zero-Risk Partner</td>
-                                    <td>GHS 0</td>
-                                    <td>GHS 0</td>
-                                    <td>5%</td>
-                                    <td>Covered by Developer</td>
-                                </tr>
-                                <tr id="row-plan-1">
-                                    <td>The Hybrid Partner</td>
-                                    <td>GHS 0</td>
-                                    <td>GHS 500</td>
-                                    <td>4%</td>
-                                    <td>Covered by Developer</td>
-                                </tr>
-                                <tr id="row-plan-2">
-                                    <td>The Standard Agency</td>
-                                    <td>GHS 0</td>
-                                    <td>GHS 500</td>
-                                    <td>3.5%</td>
-                                    <td>Paid by Client</td>
-                                </tr>
+                                <tr class="row-merchant"><td>Merchant</td><td>95%</td><td>Gets 95% of every sale — no deductions at all</td></tr>
+                                <tr class="row-developer"><td>Developer</td><td>5%</td><td>Gets 5%, but pays the Paystack fee from it</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p class="text-sm font-bold mb-1">2.1 &nbsp; Processing Fee</p>
+                        <p class="text-sm mb-3 text-justify">Paystack charges 1.95% of each transaction. The Developer absorbs this fee out of their own 5% cut. The Merchant always receives their full 95%.</p>
+
+                        <p class="text-sm font-bold mb-1">2.2 &nbsp; Example — GHS 100.00 Sale</p>
+                        <p class="text-sm mb-2 italic">Domain used in this example: <span id="contract-domain-example" class="font-medium"></span></p>
+
+                        <table class="contract-table">
+                            <thead><tr><th>Party</th><th>% Share</th><th>Gross</th><th>Fee Deducted</th><th>Final Payout</th></tr></thead>
+                            <tbody>
+                                <tr class="row-merchant"><td>Merchant</td><td>95%</td><td>GHS 95.00</td><td>GHS 0.00</td><td>GHS 95.00</td></tr>
+                                <tr class="row-developer"><td>Developer</td><td>5%</td><td>GHS 5.00</td><td>− GHS 1.95</td><td>GHS 3.05</td></tr>
+                                <tr><td>Paystack</td><td>1.95%</td><td>GHS 1.95</td><td>—</td><td>GHS 1.95</td></tr>
+                                <tr class="row-total"><td><strong>Total</strong></td><td>100%</td><td>GHS 100.00</td><td>GHS 1.95</td><td>GHS 100.00</td></tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- SaaS PARTNERSHIP AGREEMENT -->
-                    <div class="mb-8">
-                        <p class="mb-6 text-sm">
-                            <strong>DATE:</strong> <span id="contract-date-main"></span><br>
-                            <strong>BETWEEN:</strong> Rodney Appiah Afriye ("Developer")<br>
-                            <strong>AND:</strong> <span id="contract-client-main" class="font-bold uppercase"></span>
-                            ("Client")
-                        </p>
+                    <!-- 3. Refunds -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">3. What Happens with Refunds</h3>
+                        <p class="text-sm mb-2 text-justify">If a customer is approved for a full refund, the money is returned to them. Because Paystack does not refund its processing fee, the Developer bears that cost.</p>
 
-                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2">1. SCOPE OF WORK</h3>
-                        <p class="text-sm mb-2 text-justify">The Developer agrees to build, host, and maintain a custom
-                            e-commerce platform tailored to the Client's brand.</p>
-                        <p class="text-sm mb-2 text-justify"><strong>Deliverable:</strong> A high-performance
-                            Progressive Web Application (PWA) optimized for all devices, including an administrative
-                            dashboard for order management and an integrated customer notification system.</p>
-                        <p class="text-sm mb-2 text-justify"><strong>Scope Freeze:</strong> This agreement covers the
-                            deployment of the standard architecture customized with the Client's Logo, Brand Colors,
-                            Product Inventory, and specific Business Logic Configurations.</p>
-                        <p class="text-sm mb-4 text-justify"><strong>Out of Scope:</strong> Additional feature requests
-                            or structural changes outside this scope will be evaluated and billed separately at an
-                            agreed project rate.</p>
+                        <p class="text-sm font-bold mb-1">3.1 &nbsp; Refund Responsibility</p>
+                        <p class="text-sm mb-1"><strong>Merchant returns:</strong> Exactly what they originally received (95% of the sale price).</p>
+                        <p class="text-sm mb-3"><strong>Developer returns:</strong> Their full 5% commission, absorbing the 1.95% Paystack fee as a loss.</p>
 
-                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2">2. FINANCIAL TERMS
-                            (THE ZERO-SETUP SaaS MODEL)</h3>
-                        <p class="text-sm mb-2 text-justify">In lieu of traditional upfront development and monthly
-                            maintenance fees, the Developer and Client agree to a revenue-share model:</p>
-                        <ul class="list-disc list-inside text-sm mb-6 pl-2 space-y-1">
-                            <li><strong>Setup Fee:</strong> GHS 0.00 (Zero upfront cost to the Client).</li>
-                            <li><strong>Monthly Maintenance Fee:</strong> <span id="contract-maintenance"
-                                    class="font-bold"></span>.</li>
-                            <li><strong>Platform Commission:</strong> The Developer shall receive a <span
-                                    class="contract-commission font-bold"></span> commission on the gross total of every
-                                successful transaction processed through the application.</li>
-                            <li><strong>Payment Automation:</strong> This <span
-                                    class="contract-commission font-bold"></span> commission will be automatically
-                                routed to the Developer's account at the exact moment of purchase via the Paystack
-                                "Split Payment" system. The Client will automatically receive the remaining <span
-                                    class="contract-remaining font-bold"></span> into their designated settlement
-                                account.</li>
-                            <li><strong>Payment Processing Fees:</strong> The standard gateway processing fee (e.g.,
-                                Paystack's 1.95%) will be absorbed by the end-customer at checkout as a "Processing
-                                Fee." This ensures the Client's <span class="contract-remaining font-bold"></span>
-                                revenue split and product margins remain fully protected.</li>
-                        </ul><br><br><br><br>
-                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2">3. THIRD-PARTY FEES &
-                            HOSTING</h3>
-                        <p class="text-sm mb-1 text-justify">The platform utilizes reliable cloud infrastructure. While
-                            Developer labor, Domain (~250GHS/year) and maintenance are <strong><span
-                                    id="contract-hosting"></span></strong>, the Client oversees third-party utility
-                            costs:</p>
-                        <ul class="list-disc list-inside text-sm mb-4 pl-2 space-y-1">
-                            <li><strong>Free Tiers:</strong> We launch on Free Tiers (Cloudflare, Supabase, Cloudinary)
-                                supporting ~1,000 orders/month.</li>
-                            <li><strong>Scaling:</strong> If traffic exceeds free limits, the Client must upgrade server
-                                tiers directly via the cloud provider (typically ~$25 USD/month).</li>
-                        </ul>
+                        <p class="text-sm font-bold mb-1">3.2 &nbsp; Example — Full Refund on a GHS 100.00 Order</p>
+                        <p class="text-sm mb-2 italic">Domain used in this example: <span id="contract-domain-refund" class="font-medium"></span></p>
 
-                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2">4. INTELLECTUAL
-                            PROPERTY & LICENSING</h3>
-                        <p class="text-sm mb-2 text-justify"><strong>A. Ownership of Deliverables:</strong> The Client
-                            is granted exclusive ownership of the specific Branded Application instance created for
-                            their business, all User Data (customers, orders) generated by the application, and their
-                            visual branding assets.</p>
-                        <p class="text-sm mb-2 text-justify"><strong>B. Retention of Background IP:</strong> The
-                            Developer retains full ownership of the "Architecture" (the underlying source code, database
-                            structure, and admin dashboard logic). The Client is granted a Non-Exclusive,
-                            Non-Transferable License to use this code for the operation of their business for the
-                            duration of this agreement.</p>
-                        <p class="text-sm mb-6 text-justify"><strong>C. White Label Protection:</strong> The Client MAY
-                            NOT resell, license, rent, or distribute the underlying source code to third parties.</p>
+                        <table class="contract-table">
+                            <thead><tr><th>Party</th><th>Amount Refunded</th><th>Originally Received</th><th>Net Outcome</th></tr></thead>
+                            <tbody>
+                                <tr class="row-merchant"><td>Merchant</td><td>− GHS 95.00</td><td>GHS 95.00</td><td>GHS 0.00 (neutral)</td></tr>
+                                <tr class="row-developer"><td>Developer</td><td>− GHS 5.00</td><td>GHS 3.05</td><td>− GHS 1.95 (loss)</td></tr>
+                                <tr><td>Customer</td><td>+ GHS 100.00 (returned)</td><td>− GHS 100.00</td><td>GHS 0.00 (fully reversed)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2">5. INCLUDED
-                            MAINTENANCE SERVICES</h3>
-                        <p class="text-sm mb-2 text-justify">As long as the platform commission is active, the Developer
-                            agrees to provide the following ongoing services:</p>
+                    <!-- 4. Domain -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">4. Domain Name Options</h3>
+                        <p class="text-sm mb-2 text-justify">The storefront needs a web address. The Merchant has two options:</p>
+
+                        <p class="text-sm font-bold mb-1">4.1 &nbsp; Free Subdomain (No Cost)</p>
+                        <p class="text-sm mb-2 text-justify">The Merchant can use a free subdomain hosted on the Developer's network, for example: <em><span id="contract-domain-free"></span></em>. No setup fees. The Developer handles all configuration.</p>
+
+                        <p class="text-sm font-bold mb-1">4.2 &nbsp; Custom Domain (Merchant-Owned)</p>
+                        <p class="text-sm mb-1 text-justify">If the Merchant prefers a branded domain like <em><span id="contract-domain-custom"></span></em>:</p>
                         <ul class="list-disc list-inside text-sm mb-2 pl-2 space-y-1">
-                            <li>Server Uptime Monitoring: Ensuring the website and API are online and accessible.</li>
-                            <li>Security Patches: Applying critical security updates to the backend and database.</li>
-                            <li>Database Management: Regular backups of customer and order data.</li>
-                            <li>Third-Party API Maintenance: Ensuring connections to Paystack, Email providers, and
-                                media servers remain functional.</li>
+                            <li>The Merchant is responsible for purchasing and renewing the domain with a registrar (e.g. GoDaddy, Namecheap).</li>
+                            <li>The Developer will set up DNS routing, SSL certificates, and CDN caching at no extra charge.</li>
+                            <li>If the domain lapses due to non-renewal, the Developer is not liable for any resulting downtime.</li>
                         </ul>
-                        <p class="text-sm mb-6 italic">Note: This does not cover the development of new features,
-                            redesigns, or content entry (adding products).</p>
-                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2">6. TERM OF AGREEMENT &
-                            TERMINATION</h3>
-                        <p class="text-sm mb-1 text-justify"><strong>Initial Term:</strong> Commences on the Effective
-                            Date for a period of Two(2) Years.</p>
-                        <p class="text-sm mb-1 text-justify"><strong>Renewal & Renegotiation:</strong>At the end of the
-                            Initial Term, this agreement will automatically renew for successive 1-year periods. At
-                            least 60 days prior to the end of any term, the Developer or the Client may provide a
-                            written "Notice of Renegotiation" to formally renegotiate the commission percentage or
-                            service terms as the business scales. If no new terms are agreed upon, either party may
-                            provide written notice of non-renewal.</p>
-                        <p class="text-sm mb-1 text-justify"><strong>Termination for Cause:</strong> Terminable with 30
-                            days' notice upon material breach.</p>
-                        <p class="text-sm mb-6 text-justify"><strong>Handover Upon Termination:</strong> The Developer
-                            will export/provide all Client Data (CSV/JSON), cease hosting, and deactivate the commission
-                            split.</p>
+                    </div>
 
-                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2">AGREED AND ACCEPTED
-                            BY:</h3>
+                    <!-- 5. Platform Limits -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">5. Platform &amp; Hosting Limits</h3>
+                        <p class="text-sm mb-2 text-justify">The platform runs on free cloud infrastructure (Cloudflare, Supabase, Cloudinary). It handles most early-stage stores well, but there are usage caps.</p>
 
-                        <div class="grid grid-cols-2 gap-12 mt-4 relative">
+                        <p class="text-sm font-bold mb-1">5.1 &nbsp; Free Tier Limits</p>
+
+                        <table class="contract-table">
+                            <thead><tr><th>Resource</th><th>Free Tier Limit</th></tr></thead>
+                            <tbody>
+                                <tr><td>Completed orders</td><td>Approximately 1,000 orders per rolling calendar month</td></tr>
+                                <tr><td>Monthly active users</td><td>25,000 active users per month</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p class="text-sm font-bold mb-1">5.2 &nbsp; Upgrading When Limits Are Reached</p>
+                        <p class="text-sm mb-2 text-justify">If any of these limits are exceeded, the platform must be upgraded to a paid cloud plan (currently approximately $25 USD/month base, plus any extra usage costs). The Merchant covers this cost. The Developer will handle the technical migration at no extra charge.</p>
+                    </div>
+
+                    <!-- 6. IP -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">6. Who Owns What</h3>
+
+                        <p class="text-sm font-bold mb-1">6.1 &nbsp; The Developer's Work</p>
+                        <p class="text-sm mb-2 text-justify">All underlying code, architecture, API integrations, and infrastructure remain the intellectual property of the Developer and AEOPY. The Merchant is granted a non-transferable, revocable licence to use the platform for their retail operations.</p>
+
+                        <p class="text-sm font-bold mb-1">6.2 &nbsp; The Merchant's Brand &amp; Customer Data</p>
+                        <p class="text-sm mb-2 text-justify">The Merchant's logo, brand assets, product images, domain names, and all customer data collected through the storefront remain the Merchant's property. The Developer will never sell, share, or misuse this information.</p>
+                    </div>
+
+                    <!-- 7. Maintenance -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">7. Included Maintenance Services</h3>
+                        <p class="text-sm mb-2 text-justify">As long as the platform commission is active, the Developer agrees to provide the following ongoing services:</p>
+                        <ul class="list-disc list-inside text-sm mb-2 pl-2 space-y-1">
+                            <li><strong>Server Uptime Monitoring:</strong> Ensuring the website and API are online and accessible.</li>
+                            <li><strong>Security Patches:</strong> Applying critical security updates to the backend and database.</li>
+                            <li><strong>Database Management:</strong> Regular backups of customer and order data.</li>
+                            <li><strong>Third-Party API Maintenance:</strong> Ensuring connections to Paystack, email providers, and media servers remain functional.</li>
+                        </ul>
+                        <p class="text-sm italic">Note: This does not cover the development of new features, redesigns, or content entry (adding products).</p>
+                    </div>
+
+                    <!-- 8. Term & Termination -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">8. Term of Agreement &amp; Termination</h3>
+                        <p class="text-sm mb-1 text-justify"><strong>Initial Term:</strong> Commences on the Effective Date for a period of two (2) years.</p>
+                        <p class="text-sm mb-1 text-justify"><strong>Renewal &amp; Renegotiation:</strong> At the end of the Initial Term, this agreement will automatically renew for successive 1-year periods. At least 60 days prior to the end of any term, either Party may provide a written "Notice of Renegotiation" to formally renegotiate the commission percentage or service terms as the business scales. If no new terms are agreed upon, either party may provide written notice of non-renewal.</p>
+                        <p class="text-sm mb-1 text-justify"><strong>Termination for Cause:</strong> Terminable with 30 days' written notice upon material breach.</p>
+                        <p class="text-sm mb-2 text-justify"><strong>Handover Upon Termination:</strong> The Developer will export and provide all Merchant data (CSV/JSON), cease hosting, and deactivate the commission split.</p>
+                    </div>
+
+                    <!-- 9. Governing Law -->
+                    <div class="mb-5">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">9. Governing Law</h3>
+                        <p class="text-sm text-justify">This agreement is governed by the laws of the Republic of Ghana. Any unresolved disputes will be referred to the courts in Accra.</p>
+                    </div>
+
+                    <!-- Signatures -->
+                    <div class="mb-6">
+                        <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-3 border-b border-gray-200 pb-1">Signatures</h3>
+                        <p class="text-sm mb-4">By signing below, both Parties confirm they have read, understood, and agreed to all the terms of this Agreement.</p>
+
+                        <div class="grid grid-cols-2 gap-12 mt-4">
+                            <!-- Developer -->
                             <div>
                                 <p class="text-sm font-bold mb-1">Rodney Appiah Afriye</p>
+                                <p class="text-xs text-gray-500 mb-2">AEOPY Network Architect</p>
                                 <div class="h-14 relative flex items-end">
-                                    <img src="signature.PNG" alt="Signature"
+                                    <img src="signature.PNG" alt="Developer Signature"
                                         class="absolute bottom-0 left-2 h-16 object-contain z-10"
                                         onerror="this.style.display='none'">
                                 </div>
@@ -1008,23 +861,31 @@
                                     <p class="text-xs font-bold whitespace-nowrap">Date: <span
                                             class="contract-sig-date text-gray-700 font-normal"></span></p>
                                 </div>
-                                <p class="text-xs text-gray-500 mt-2">(Developer)</p>
+                                <p class="text-xs text-gray-500 mt-2">(For the Developer)</p>
                             </div>
+                            <!-- Merchant -->
                             <div>
                                 <p class="text-sm font-bold mb-1"><span class="contract-client-name-sig"></span></p>
+                                <p class="text-xs text-gray-500 mb-2">Managing Director / Founder</p>
                                 <div class="h-14"></div>
                                 <div class="flex items-end gap-2">
                                     <div class="h-px bg-gray-400 flex-grow"></div>
                                     <p class="text-xs font-bold whitespace-nowrap">Date: <span
                                             class="contract-sig-date text-gray-700 font-normal"></span></p>
                                 </div>
-                                <p class="text-xs text-gray-500 mt-2">(Client)</p>
+                                <p class="text-xs text-gray-500 mt-2">(For the Merchant)</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="mt-8 flex justify-center no-print">
+                    <!-- Footer -->
+                    <div class="text-center border-t border-gray-200 pt-4 mt-6">
+                        <p class="text-xs font-bold tracking-widest uppercase text-gray-400">AEOPY — Confidential</p>
+                    </div>
+
+                </div><!-- /contract-content -->
+
+                <div class="mt-8 flex justify-center no-print pb-8">
                     <button onclick="downloadPDF()"
                         class="flex items-center gap-3 px-8 py-4 rounded-xl bg-gray-900 hover:bg-black text-white font-bold text-lg transition shadow-xl transform hover:scale-105">
                         <span class="material-symbols-outlined">download</span> Download PDF / Print
@@ -1033,7 +894,7 @@
             </div>
         </div>
 
-        <!-- Side Navigation Buttons -->
+        <!-- ── Navigation Buttons ── -->
         <button id="prevBtn"
             class="fixed left-2 lg:left-6 top-1/2 -translate-y-1/2 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-white/60 hover:bg-white/95 text-gray-600 hover:text-brand-600 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-xl backdrop-blur-md disabled:opacity-0 disabled:pointer-events-none z-[100] border border-gray-200 hover:scale-110 no-print">
             <span class="material-symbols-outlined text-2xl lg:text-4xl pl-0 lg:pl-[2px]">chevron_left</span>
@@ -1043,66 +904,32 @@
             <span class="material-symbols-outlined text-2xl lg:text-4xl pr-0 lg:pr-[2px]">chevron_right</span>
         </button>
 
-    </div>
+    </div><!-- /wizard-container -->
 
     <script>
-        const views = document.querySelectorAll('.section-view');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+        const views     = document.querySelectorAll('.section-view');
+        const prevBtn   = document.getElementById('prevBtn');
+        const nextBtn   = document.getElementById('nextBtn');
+        const totalViews = views.length; // 0-5: slides, 5: form, 6: contract
 
         let currentView = 0;
-        const totalViews = views.length;
 
-        // State for Plan Selection
-        let selectedPlanIndex = null;
-
-        // Updated SaaS Pricing Plans
-        const plans = [
-            {
-                name: 'The Zero-Risk Partner',
-                setup: 'GHS 0',
-                monthly: 'GHS 0.00',
-                hosting: 'covered by the Developer (Year 1)',
-                commission: '5%',
-                commissionNum: 5
-            },
-            {
-                name: 'The Hybrid Partner',
-                setup: 'GHS 0',
-                monthly: 'GHS 500.00/month',
-                hosting: 'covered by the Developer (Year 1)',
-                commission: '4%',
-                commissionNum: 4
-            },
-            {
-                name: 'The Standard Agency',
-                setup: 'GHS 0',
-                monthly: 'GHS 500.00/month',
-                hosting: 'paid by the Client',
-                commission: '3.5%',
-                commissionNum: 3.5
-            }
-        ];
-
-        // Init: Set min date
+        // ── Init ──────────────────────────────────────────────
         window.onload = function () {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('client-date').setAttribute('min', today);
+            document.getElementById('client-date').value = today;
+            updateView();
         };
 
+        // ── View helpers ──────────────────────────────────────
         function updateView() {
-            views.forEach((view, index) => {
-                view.classList.remove('active');
-                if (index === currentView) {
-                    view.classList.add('active');
-                }
+            views.forEach((v, i) => {
+                v.classList.toggle('active', i === currentView);
             });
-
-            // Button Logic
             prevBtn.disabled = currentView === 0;
-
-            // Hide next button on last view (Contract)
-            if (currentView === totalViews - 1) {
+            // Hide next on form (5) and contract (6) slides
+            if (currentView >= totalViews - 2) {
                 nextBtn.style.display = 'none';
             } else {
                 nextBtn.style.display = 'flex';
@@ -1111,12 +938,11 @@
         }
 
         function nextView() {
-            // Validation before moving past Form (Index 6)
-            if (currentView === 6) {
+            // If we're on the form slide, trigger generation
+            if (currentView === totalViews - 2) {
                 generateContract();
                 return;
             }
-
             if (currentView < totalViews - 1) {
                 currentView++;
                 updateView();
@@ -1130,112 +956,79 @@
             }
         }
 
-        // Plan Selection Logic
-        function togglePlan(index) {
-            const planId = 'plan-' + index;
-            const element = document.getElementById(planId);
-
-            if (selectedPlanIndex === index) {
-                element.classList.remove('active-plan');
-                selectedPlanIndex = null;
-            } else {
-                if (selectedPlanIndex !== null) {
-                    const prevElement = document.getElementById('plan-' + selectedPlanIndex);
-                    if (prevElement) prevElement.classList.remove('active-plan');
-                }
-
-                element.classList.add('active-plan');
-                selectedPlanIndex = index;
-            }
-        }
-
-        function handleSelectPlan(index) {
-            if (selectedPlanIndex !== index) {
-                togglePlan(index);
-            }
-            nextView();
-        }
-
+        // Jump directly to the form from the Roadmap CTA
         function goToForm() {
-            if (selectedPlanIndex === null) {
-                alert("Please select a plan from the Pricing section first.");
-                currentView = 4; // Pricing is at index 4
-                updateView();
-                return;
-            }
-            currentView = 6; // Form is at index 6
+            currentView = totalViews - 2; // form slide index
             updateView();
         }
 
+        // ── Date formatting ───────────────────────────────────
+        function formatDateOrdinal(dateStr) {
+            const d   = new Date(dateStr + 'T00:00:00');
+            const day = d.getDate();
+            const s   = (day===1||day===21||day===31)?'st':(day===2||day===22)?'nd':(day===3||day===23)?'rd':'th';
+            const mon = d.toLocaleDateString('en-GB', { month: 'long' });
+            return `${day}${s} ${mon}, ${d.getFullYear()}`;
+        }
+
+        function slug(name) {
+            return name.toLowerCase().replace(/[^a-z0-9]+/g, '');
+        }
+
+        // ── Generate Contract ─────────────────────────────────
         function generateContract() {
-            const fname = document.getElementById('client-fname').value;
-            const lname = document.getElementById('client-lname').value;
-            const company = document.getElementById('client-company').value;
+            const fname   = document.getElementById('client-fname').value.trim();
+            const lname   = document.getElementById('client-lname').value.trim();
+            const company = document.getElementById('client-company').value.trim();
             const dateStr = document.getElementById('client-date').value;
 
             if (!fname || !lname || !company || !dateStr) {
-                alert("Please fill in all details before generating the agreement.");
+                alert('Please fill in all details before generating the agreement.');
                 return;
             }
 
-            const fullName = `${fname} ${lname}`;
-            const planData = plans[selectedPlanIndex];
+            const fullName      = `${fname} ${lname}`;
+            const storeSlug     = slug(company);
+            const formattedDate = formatDateOrdinal(dateStr);
+            const freeDomain    = `https://${storeSlug}.aeopy.com`;
+            const customDomain  = `https://${storeSlug}.com`;
 
-            // Highlight Table Row
-            document.querySelectorAll('.contract-table tr').forEach(row => row.classList.remove('highlight-plan'));
-            const rowId = `row-plan-${selectedPlanIndex}`;
-            document.getElementById(rowId).classList.add('highlight-plan');
+            // Populate contract fields
+            document.getElementById('contract-date-main').textContent    = formattedDate;
+            document.getElementById('contract-client-main').textContent  = `${fullName} / ${company}`;
+            document.getElementById('contract-domain-example').textContent = `${freeDomain} or ${customDomain}`;
+            document.getElementById('contract-domain-refund').textContent  = `${freeDomain} or ${customDomain}`;
+            document.getElementById('contract-domain-free').textContent    = freeDomain;
+            document.getElementById('contract-domain-custom').textContent  = customDomain;
 
-            // Format dates
-            const startDate = new Date(dateStr);
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedStart = startDate.toLocaleDateString('en-GB', options);
+            document.querySelectorAll('.contract-client-name-sig').forEach(el => el.textContent = fullName);
+            document.querySelectorAll('.contract-sig-date').forEach(el => el.textContent = formattedDate);
 
-            // Populate Client Details & Dynamic Contract Variables
-            document.getElementById('contract-date-main').textContent = formattedStart;
-            document.getElementById('contract-client-main').textContent = fullName + " (" + company + ")";
-
-            document.getElementById('contract-maintenance').textContent = planData.monthly;
-            document.querySelectorAll('.contract-commission').forEach(el => el.textContent = planData.commission);
-
-            // Calculate remaining split (100 - commission percentage)
-            const remainingSplit = (100 - planData.commissionNum) + "%";
-            document.querySelectorAll('.contract-remaining').forEach(el => el.textContent = remainingSplit);
-
-            document.getElementById('contract-hosting').textContent = planData.hosting;
-
-            // Populate Signature Strings
-            const sigSpans = document.querySelectorAll('.contract-client-name-sig');
-            sigSpans.forEach(span => span.textContent = fullName);
-
-            const sigDateSpans = document.querySelectorAll('.contract-sig-date');
-            sigDateSpans.forEach(span => span.textContent = formattedStart);
-
-            // Move to contract view
-            currentView = 7;
+            // Go to contract view
+            currentView = totalViews - 1;
             updateView();
         }
 
+        // ── PDF Download ──────────────────────────────────────
         function downloadPDF() {
+            const company = document.getElementById('client-company').value.trim() || 'Client';
             const element = document.getElementById('contract-content');
-            const companyName = document.getElementById('client-company').value || 'Client';
 
             const opt = {
-                margin: [8, 10, 8, 10],
-                filename: `SaaS_Partnership_Agreement_${companyName.replace(/\s+/g, '_')}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                margin:      [8, 10, 8, 10],
+                filename:    `Revenue_Share_Agreement_${company.replace(/\s+/g, '_')}.pdf`,
+                image:       { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
             html2pdf().set(opt).from(element).save();
         }
 
-        // Event Listeners
+        // ── Event listeners ───────────────────────────────────
         nextBtn.addEventListener('click', nextView);
         prevBtn.addEventListener('click', prevView);
 
-        // Keyboard Navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                 if (currentView !== totalViews - 1) nextView();
@@ -1243,9 +1036,6 @@
                 prevView();
             }
         });
-
-        // Initialize
-        updateView();
     </script>
 </body>
 
