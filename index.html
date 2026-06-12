@@ -249,19 +249,14 @@
             h1, h2, h3 { page-break-after: avoid !important; break-after: avoid !important; }
 
             /* Each .print-block (wraps a table or the parties block)
-               will refuse to split — it moves wholesale to the next page */
+               will split naturally */
             .print-block {
-                break-inside: avoid !important;
-                page-break-inside: avoid !important;
-                display: table !important;   /* tables honour break-inside only as display:table */
                 width: 100% !important;
             }
 
             /* Table-specific print styles */
             .contract-table {
                 font-size: 9pt !important;
-                break-inside: avoid !important;
-                page-break-inside: avoid !important;
             }
             .contract-table th { background-color: #f3f4f6 !important; }
             .contract-table tr.row-merchant td { background: #f0fdf4 !important; }
@@ -1192,7 +1187,7 @@
                 image:       { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, logging: false },
                 jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:   { mode: ['avoid-all', 'css', 'legacy'], before: '.print-block' }
+                pagebreak:   { mode: ['css', 'legacy'] }
             };
 
             html2pdf().set(opt).from(element).save();
