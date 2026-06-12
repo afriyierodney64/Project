@@ -246,21 +246,39 @@
             #contract-content { font-size: 10.5pt !important; }
 
             /* Section headings never orphan from their content */
-            h1, h2, h3 { page-break-after: avoid !important; }
+            h1, h2, h3 { page-break-after: avoid !important; break-after: avoid !important; }
 
-            /* Keep tables together where possible */
-            .table-scroll { overflow: visible !important; page-break-inside: avoid; }
-            .contract-table { page-break-inside: avoid; font-size: 9pt !important; min-width: 0 !important; }
+            /* Each .print-block (wraps a table or the parties block)
+               will refuse to split — it moves wholesale to the next page */
+            .print-block {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                display: table !important;   /* tables honour break-inside only as display:table */
+                width: 100% !important;
+            }
+
+            /* Table-specific print styles */
+            .contract-table {
+                font-size: 9pt !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
             .contract-table th { background-color: #f3f4f6 !important; }
             .contract-table tr.row-merchant td { background: #f0fdf4 !important; }
             .contract-table tr.row-developer td { background: #eff6ff !important; }
             .contract-table tr.row-total td { background: #f9fafb !important; }
 
             /* Parties block always on one page */
-            .parties-outer { page-break-inside: avoid; }
+            .parties-outer {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
 
             /* Signatures stay together */
-            .sig-grid-print { page-break-inside: avoid; }
+            .sig-grid-print {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
 
             /* Ensure signature image prints */
             img { display: block !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -807,6 +825,7 @@
                         <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">2. How Revenue Is Split</h3>
                         <p class="text-sm mb-3 text-justify">Every online payment goes through Paystack (the payment gateway). Here is how the money is divided on each sale:</p>
 
+                        <div class="print-block">
                         <table class="contract-table">
                             <thead><tr><th>Party</th><th>Share</th><th>What This Means</th></tr></thead>
                             <tbody>
@@ -822,6 +841,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
 
                         <p class="text-sm font-bold mb-1">2.1 &nbsp; Processing Fee</p>
                         <p class="text-sm mb-3 text-justify">Paystack charges 1.95% of each transaction. The Developer absorbs this fee out of their own 5% cut. The Merchant always receives their full 95%.</p>
@@ -829,6 +849,7 @@
                         <p class="text-sm font-bold mb-1">2.2 &nbsp; Example — GHS 100.00 Sale</p>
                         <p class="text-sm mb-2 italic">Domain used in this example: <span id="contract-domain-example" class="font-medium"></span></p>
 
+                        <div class="print-block">
                         <table class="contract-table">
                             <thead><tr><th>Party</th><th>% Share</th><th>Gross</th><th>Fee Deducted</th><th>Final Payout</th></tr></thead>
                             <tbody>
@@ -862,6 +883,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
                     <!-- 3. Refunds -->
@@ -876,6 +898,7 @@
                         <p class="text-sm font-bold mb-1">3.2 &nbsp; Example — Full Refund on a GHS 100.00 Order</p>
                         <p class="text-sm mb-2 italic">Domain used in this example: <span id="contract-domain-refund" class="font-medium"></span></p>
 
+                        <div class="print-block">
                         <table class="contract-table">
                             <thead><tr><th>Party</th><th>Amount Refunded</th><th>Originally Received</th><th>Net Outcome</th></tr></thead>
                             <tbody>
@@ -899,6 +922,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
                     <!-- 4. Domain -->
@@ -1022,10 +1046,16 @@
 
                 </div><!-- /contract-content -->
 
-                <div class="mt-8 flex justify-center no-print pb-8">
-                    <button onclick="downloadPDF()"
+                <div class="mt-8 flex flex-wrap justify-center gap-4 no-print pb-8">
+                    <!-- Print / Preview — opens browser print dialog with full A4 preview -->
+                    <button onclick="printContract()"
                         class="flex items-center gap-3 px-8 py-4 rounded-xl bg-gray-900 hover:bg-black text-white font-bold text-lg transition shadow-xl transform hover:scale-105">
-                        <span class="material-symbols-outlined">download</span> Download PDF / Print
+                        <span class="material-symbols-outlined">print</span> Print / Preview PDF
+                    </button>
+                    <!-- Direct silent download via html2pdf -->
+                    <button onclick="downloadPDF()"
+                        class="flex items-center gap-3 px-8 py-4 rounded-xl bg-white border-2 border-gray-900 hover:bg-gray-50 text-gray-900 font-bold text-lg transition shadow-md transform hover:scale-105">
+                        <span class="material-symbols-outlined">download</span> Download PDF
                     </button>
                 </div>
             </div>
@@ -1146,17 +1176,23 @@
             updateView();
         }
 
-        // ── PDF Download ──────────────────────────────────────
+        // ── Print Preview (browser native dialog) ────────────────
+        function printContract() {
+            window.print();
+        }
+
+        // ── Silent PDF Download (html2pdf) ────────────────────────
         function downloadPDF() {
             const company = document.getElementById('client-company').value.trim() || 'Client';
             const element = document.getElementById('contract-content');
 
             const opt = {
-                margin:      [8, 10, 8, 10],
+                margin:      [12, 14, 12, 14],
                 filename:    `Revenue_Share_Agreement_${company.replace(/\s+/g, '_')}.pdf`,
                 image:       { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                html2canvas: { scale: 2, useCORS: true, logging: false },
+                jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak:   { mode: ['avoid-all', 'css', 'legacy'], before: '.print-block' }
             };
 
             html2pdf().set(opt).from(element).save();
