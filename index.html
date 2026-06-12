@@ -120,7 +120,14 @@
         }
 
         /* ── TABLE MOBILE SCROLL ── */
-        .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 1.2rem; }
+        .table-scroll {
+            overflow-x: auto;
+            overflow-y: visible;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 1.2rem;
+            /* small padding so bottom border is never clipped */
+            padding-bottom: 2px;
+        }
         .table-scroll .contract-table { margin-bottom: 0; min-width: 420px; }
 
         /* ── CONTRACT TABLES ── */
@@ -150,28 +157,22 @@
         .contract-table tr.row-developer td { background: #eff6ff; font-weight: 600; }
         .contract-table tr.row-total td { font-weight: 700; background: #f9fafb; }
 
-        /* ── PARTIES BLOCK MOBILE ── */
+        /* ── PARTIES BLOCK ── */
         .parties-grid {
             display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 0;
-            align-items: stretch;
+            border-top: 2px solid #111827;
+            border-bottom: 1px solid #e5e7eb;
         }
-        /* On mobile: stack the columns vertically, hide the centre divider */
+        .parties-dev  { padding: 1.1rem 1.5rem 1.1rem 0; border-right: 1px solid #e5e7eb; }
+        .parties-merchant { padding: 1.1rem 0 1.1rem 1.5rem; }
+
+        /* Stack on narrow screens */
         @media (max-width: 540px) {
-            .parties-grid {
-                grid-template-columns: 1fr;
-            }
-            .parties-divider { display: none !important; }
-            .parties-dev {
-                padding: .9rem 0 .9rem 0 !important;
-                border-right: none !important;
-                border-bottom: 1px solid #e5e7eb !important;
-            }
-            .parties-merchant {
-                padding: .9rem 0 .9rem 0 !important;
-                border-left: none !important;
-            }
+            .parties-grid { grid-template-columns: 1fr; }
+            .parties-dev  { border-right: none; border-bottom: 1px solid #e5e7eb; padding: .9rem 0; }
+            .parties-merchant { padding: .9rem 0; }
         }
 
         /* ── PRINT / A4 ─────────────────────────────────────────── */
@@ -741,26 +742,17 @@
                             <div style="flex:1;height:1px;background:#d1d5db;"></div>
                         </div>
 
-                        <!-- Split party columns (stacks on mobile) -->
+                        <!-- Split party columns (clean 2-col, stacks on mobile) -->
                         <div class="parties-grid">
-
                             <!-- Developer -->
-                            <div class="parties-dev" style="padding:1.1rem 1.4rem 1.1rem 0;border-top:2px solid #111827;border-bottom:1px solid #e5e7eb;">
+                            <div class="parties-dev">
                                 <p style="font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#6b7280;margin-bottom:.55rem;">Developer</p>
                                 <p style="font-size:.92rem;font-weight:700;color:#111827;margin-bottom:.2rem;">Rodney Appiah Afriye</p>
                                 <p style="font-size:.8rem;color:#6b7280;line-height:1.4;">Operating under the AEOPY<br>software development network</p>
                                 <p style="font-size:.75rem;color:#9ca3af;margin-top:.45rem;font-style:italic;">(the "Developer")</p>
                             </div>
-
-                            <!-- Centre divider with BETWEEN label -->
-                            <div class="parties-divider" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 1.5rem;border-top:2px solid #111827;border-bottom:1px solid #e5e7eb;">
-                                <div style="height:100%;width:1px;background:repeating-linear-gradient(to bottom,#d1d5db 0,#d1d5db 5px,transparent 5px,transparent 10px);position:relative;display:flex;align-items:center;justify-content:center;">
-                                    <span style="background:#fff;padding:.35rem 0;font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#9ca3af;writing-mode:vertical-rl;text-orientation:mixed;">Between</span>
-                                </div>
-                            </div>
-
                             <!-- Merchant -->
-                            <div class="parties-merchant" style="padding:1.1rem 0 1.1rem 1.4rem;border-top:2px solid #111827;border-bottom:1px solid #e5e7eb;">
+                            <div class="parties-merchant">
                                 <p style="font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#6b7280;margin-bottom:.55rem;">Merchant</p>
                                 <p style="font-size:.92rem;font-weight:700;color:#111827;margin-bottom:.2rem;text-transform:uppercase;" id="contract-client-main"></p>
                                 <p style="font-size:.75rem;color:#9ca3af;margin-top:.45rem;font-style:italic;">(the "Merchant")</p>
