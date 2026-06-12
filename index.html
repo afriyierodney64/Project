@@ -119,17 +119,6 @@
             margin: 0 auto;
         }
 
-        /* ── TABLE MOBILE SCROLL ── */
-        .table-scroll {
-            overflow-x: auto;
-            overflow-y: visible;
-            -webkit-overflow-scrolling: touch;
-            margin-bottom: 1.2rem;
-            /* small padding so bottom border is never clipped */
-            padding-bottom: 2px;
-        }
-        .table-scroll .contract-table { margin-bottom: 0; min-width: 420px; }
-
         /* ── CONTRACT TABLES ── */
         .contract-table {
             width: 100%;
@@ -139,23 +128,59 @@
             border: 1px solid #e5e7eb;
             font-family: 'Inter', sans-serif;
         }
-
         .contract-table th,
         .contract-table td {
             border: 1px solid #e5e7eb;
             padding: 8px 10px;
             text-align: left;
         }
-
         .contract-table th {
             background-color: #f9fafb;
             font-weight: 700;
             color: #111827;
         }
-
         .contract-table tr.row-merchant td { background: #f0fdf4; font-weight: 600; }
         .contract-table tr.row-developer td { background: #eff6ff; font-weight: 600; }
         .contract-table tr.row-total td { font-weight: 700; background: #f9fafb; }
+
+        /* ── RESPONSIVE TABLE — stacked cards on mobile ── */
+        @media (max-width: 640px) {
+            .contract-table thead { display: none; }
+            .contract-table, .contract-table tbody,
+            .contract-table tr, .contract-table td { display: block; width: 100%; }
+            .contract-table tr {
+                margin-bottom: .6rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            .contract-table tr.row-merchant { border-color: #bbf7d0; }
+            .contract-table tr.row-developer { border-color: #bfdbfe; }
+            .contract-table tr.row-total     { border-color: #d1d5db; }
+            .contract-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: .5rem;
+                border: none;
+                border-bottom: 1px solid #f3f4f6;
+                padding: .5rem .75rem;
+                font-size: .8rem;
+                text-align: right;
+            }
+            .contract-table td:last-child { border-bottom: none; }
+            .contract-table td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                font-size: .7rem;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+                color: #6b7280;
+                white-space: nowrap;
+                flex-shrink: 0;
+                text-align: left;
+            }
+        }
 
         /* ── PARTIES BLOCK ── */
         .parties-grid {
@@ -782,15 +807,21 @@
                         <h3 class="font-bold text-gray-900 uppercase text-xs tracking-wider mb-2 border-b border-gray-200 pb-1">2. How Revenue Is Split</h3>
                         <p class="text-sm mb-3 text-justify">Every online payment goes through Paystack (the payment gateway). Here is how the money is divided on each sale:</p>
 
-                        <div class="table-scroll">
                         <table class="contract-table">
                             <thead><tr><th>Party</th><th>Share</th><th>What This Means</th></tr></thead>
                             <tbody>
-                                <tr class="row-merchant"><td>Merchant</td><td>95%</td><td>Gets 95% of every sale — no deductions at all</td></tr>
-                                <tr class="row-developer"><td>Developer</td><td>5%</td><td>Gets 5%, but pays the Paystack fee from it</td></tr>
+                                <tr class="row-merchant">
+                                    <td data-label="Party">Merchant</td>
+                                    <td data-label="Share">95%</td>
+                                    <td data-label="What This Means">Gets 95% of every sale — no deductions at all</td>
+                                </tr>
+                                <tr class="row-developer">
+                                    <td data-label="Party">Developer</td>
+                                    <td data-label="Share">5%</td>
+                                    <td data-label="What This Means">Gets 5%, but pays the Paystack fee from it</td>
+                                </tr>
                             </tbody>
                         </table>
-                        </div>
 
                         <p class="text-sm font-bold mb-1">2.1 &nbsp; Processing Fee</p>
                         <p class="text-sm mb-3 text-justify">Paystack charges 1.95% of each transaction. The Developer absorbs this fee out of their own 5% cut. The Merchant always receives their full 95%.</p>
@@ -798,17 +829,39 @@
                         <p class="text-sm font-bold mb-1">2.2 &nbsp; Example — GHS 100.00 Sale</p>
                         <p class="text-sm mb-2 italic">Domain used in this example: <span id="contract-domain-example" class="font-medium"></span></p>
 
-                        <div class="table-scroll">
                         <table class="contract-table">
                             <thead><tr><th>Party</th><th>% Share</th><th>Gross</th><th>Fee Deducted</th><th>Final Payout</th></tr></thead>
                             <tbody>
-                                <tr class="row-merchant"><td>Merchant</td><td>95%</td><td>GHS 95.00</td><td>GHS 0.00</td><td>GHS 95.00</td></tr>
-                                <tr class="row-developer"><td>Developer</td><td>5%</td><td>GHS 5.00</td><td>− GHS 1.95</td><td>GHS 3.05</td></tr>
-                                <tr><td>Paystack</td><td>1.95%</td><td>GHS 1.95</td><td>—</td><td>GHS 1.95</td></tr>
-                                <tr class="row-total"><td><strong>Total</strong></td><td>100%</td><td>GHS 100.00</td><td>GHS 1.95</td><td>GHS 100.00</td></tr>
+                                <tr class="row-merchant">
+                                    <td data-label="Party">Merchant</td>
+                                    <td data-label="% Share">95%</td>
+                                    <td data-label="Gross">GHS 95.00</td>
+                                    <td data-label="Fee Deducted">GHS 0.00</td>
+                                    <td data-label="Final Payout">GHS 95.00</td>
+                                </tr>
+                                <tr class="row-developer">
+                                    <td data-label="Party">Developer</td>
+                                    <td data-label="% Share">5%</td>
+                                    <td data-label="Gross">GHS 5.00</td>
+                                    <td data-label="Fee Deducted">− GHS 1.95</td>
+                                    <td data-label="Final Payout">GHS 3.05</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Party">Paystack</td>
+                                    <td data-label="% Share">1.95%</td>
+                                    <td data-label="Gross">GHS 1.95</td>
+                                    <td data-label="Fee Deducted">—</td>
+                                    <td data-label="Final Payout">GHS 1.95</td>
+                                </tr>
+                                <tr class="row-total">
+                                    <td data-label="Party"><strong>Total</strong></td>
+                                    <td data-label="% Share">100%</td>
+                                    <td data-label="Gross">GHS 100.00</td>
+                                    <td data-label="Fee Deducted">GHS 1.95</td>
+                                    <td data-label="Final Payout">GHS 100.00</td>
+                                </tr>
                             </tbody>
                         </table>
-                        </div>
                     </div>
 
                     <!-- 3. Refunds -->
@@ -823,16 +876,29 @@
                         <p class="text-sm font-bold mb-1">3.2 &nbsp; Example — Full Refund on a GHS 100.00 Order</p>
                         <p class="text-sm mb-2 italic">Domain used in this example: <span id="contract-domain-refund" class="font-medium"></span></p>
 
-                        <div class="table-scroll">
                         <table class="contract-table">
                             <thead><tr><th>Party</th><th>Amount Refunded</th><th>Originally Received</th><th>Net Outcome</th></tr></thead>
                             <tbody>
-                                <tr class="row-merchant"><td>Merchant</td><td>− GHS 95.00</td><td>GHS 95.00</td><td>GHS 0.00 (neutral)</td></tr>
-                                <tr class="row-developer"><td>Developer</td><td>− GHS 5.00</td><td>GHS 3.05</td><td>− GHS 1.95 (loss)</td></tr>
-                                <tr><td>Customer</td><td>+ GHS 100.00 (returned)</td><td>− GHS 100.00</td><td>GHS 0.00 (fully reversed)</td></tr>
+                                <tr class="row-merchant">
+                                    <td data-label="Party">Merchant</td>
+                                    <td data-label="Amount Refunded">− GHS 95.00</td>
+                                    <td data-label="Originally Received">GHS 95.00</td>
+                                    <td data-label="Net Outcome">GHS 0.00 (neutral)</td>
+                                </tr>
+                                <tr class="row-developer">
+                                    <td data-label="Party">Developer</td>
+                                    <td data-label="Amount Refunded">− GHS 5.00</td>
+                                    <td data-label="Originally Received">GHS 3.05</td>
+                                    <td data-label="Net Outcome">− GHS 1.95 (loss)</td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Party">Customer</td>
+                                    <td data-label="Amount Refunded">+ GHS 100.00 (returned)</td>
+                                    <td data-label="Originally Received">− GHS 100.00</td>
+                                    <td data-label="Net Outcome">GHS 0.00 (fully reversed)</td>
+                                </tr>
                             </tbody>
                         </table>
-                        </div>
                     </div>
 
                     <!-- 4. Domain -->
