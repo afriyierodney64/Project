@@ -1082,10 +1082,11 @@
             });
             
             if (isFormOnlyMode) {
-                // In form-only mode, only allow going back from the contract (6) to the form (5)
-                prevBtn.disabled = currentView <= 5;
+                // In form-only mode, hide both navigation chevrons completely
+                prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
             } else {
+                prevBtn.style.display = 'flex';
                 prevBtn.disabled = currentView === 0;
                 // Hide next on form (5) and contract (6) slides
                 if (currentView >= totalViews - 2) {
