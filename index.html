@@ -112,11 +112,20 @@
                 padding-top: 2rem;
                 padding-bottom: 8rem;
             }
-            /* Position the client details form card lower down on the screen */
+            /* Perfectly center the client details form slide vertically & horizontally */
+            #slide-5 {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
             #slide-5 .content-wrapper {
-                justify-content: flex-start;
-                padding-top: 12vh;
-                padding-bottom: 6rem;
+                justify-content: center !important;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            @media (max-width: 640px) {
+                #slide-5 {
+                    padding: 1.2rem !important;
+                }
             }
         }
 
